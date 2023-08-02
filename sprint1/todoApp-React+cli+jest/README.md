@@ -1,36 +1,38 @@
+#To Do List 
 
-Creacion del cli:
+Node-typescript App project with 2 interfaces: cli & react, and tested with jest
 
-npm init -y
-npm install -S chalk figlet
-npm install @types/node typescript --save-dev
-npm i --save-dev @types/clear
-npm i --save-dev @types/figlet
-npm i --save-dev @types/inquirer
-npm install @inquirer/prompts
-npm i node-json-db
-npm i fs
+##Installation 
 
-creacion de tsconfig.json:
+```
+ItAcademy-bootcamp/sprint1/todoApp-React+cli+jest/> npm i
+ItAcademy-bootcamp/sprint1/todoApp-React+cli+jest/react-ts/> npm i
+```
 
-{
-  "compilerOptions": {
-    "rootDir": "src",
-    "outDir": "dist",
-    "strict": true,
-    "target": "es6",
-# eliminamos:    "module": "commonjs",
-    "sourceMap": true,
-    "esModuleInterop": true,
-    "moduleResolution": "node"
-  }
-}
+##Usage React Interface
+```
+ItAcademy-bootcamp/sprint1/todoApp-React+cli+jest/react-ts/> npm run dev
+```
 
-incluir en el package.json:
+##Usage Cli Interface
 
-#  "type": "module",
- "scripts": {
-#   "build": "npx tsc", 
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
+ItAcademy-bootcamp/sprint1/todoApp-React+cli+jest/cli/> 
+node build/index.js
+    command | description of your task
+    --------|-------------------------
+    add     | "your task"
+
+    command | Number of your task
+    --------|-------------------------
+    delete  |<your number task>
+    done    |<your number task>
+
+    command |
+    --------|-------------------------
+    list
+
+
+##Testing
+```
+ItAcademy-bootcamp/sprint1/todoApp-React+cli+jest/cli/> npx jest
+```
