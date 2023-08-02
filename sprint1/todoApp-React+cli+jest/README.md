@@ -18,6 +18,7 @@ ItAcademy-bootcamp/sprint1/todoApp-React+cli+jest/react-ts/> npm run dev
 
 ItAcademy-bootcamp/sprint1/todoApp-React+cli+jest/cli/> 
 node build/index.js
+
     command | description of your task
     --------|-------------------------
     add     | "your task"
