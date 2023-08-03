@@ -1,7 +1,6 @@
 import React from "react";
 import { useState } from 'react';
 import { ChangeEvent } from "react";
-//import {RenderList} from "./components/RenderList";
 
 export interface TodoTask {
   idNumber: number,
@@ -13,15 +12,14 @@ const App: React.FC = () => {
   const [idNum, setIdNum] = useState<number>(1)
   const [task, setTask] = useState<string>('');
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [isCompleted, setIsCompleted] = useState<boolean>(false);
+  const isCompleted:boolean = false;
   const [list,setList] = useState<TodoTask[]>([]);
-
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.name === 'task') {
       setTask(event.target.value);
     }
   }
-
+  
   const handleKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (event) => {
     if (event.key === "Enter" && task.length > 0) {
       addTask();
@@ -29,15 +27,17 @@ const App: React.FC = () => {
 }
 
   const addTask = () => {
-    const newTask:TodoTask = {
-      idNumber:idNum,
-      taskName:task,
-      isCompletedTask:isCompleted
-    }
-    setTask('');
-    setList([...list, newTask]);
-    setIdNum((idNum) => idNum + 1);
+    if (task.length>0) {
 
+      const newTask:TodoTask = {
+        idNumber:idNum,
+        taskName:task,
+        isCompletedTask:isCompleted
+      }
+      setTask('');
+      setList([...list, newTask]);
+      setIdNum((idNum) => idNum + 1);
+  }
   }
 
   const toggleDoneTask = (id:number):void => {

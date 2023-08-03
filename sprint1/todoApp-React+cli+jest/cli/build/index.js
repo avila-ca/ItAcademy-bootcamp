@@ -22,7 +22,7 @@ else if (command === "delete") {
 }
 else if (command === "list") {
     (0, tasks_1.listTasks)().forEach((task) => {
-        const status = task.done ? "[x]" : "[ ]";
-        console.log(`${status} ${task.id}. ${task.description}`);
+        const status = task.isCompletedTask ? "[x]" : "[ ]";
+        console.log(`${status} ${task.idNumber}. ${task.taskName}`);
     });
 }

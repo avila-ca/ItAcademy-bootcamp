@@ -1,52 +1,45 @@
 import * as fs from "fs";
-
+import {TodoTask} from './TodoTask';
 const TASKS_FILE_PATH = "tasks.json";
 
-interface Task {
-  id: number;
-  description: string;
-  done: boolean;
-}
-
-let tasks: Task[] = [];
-
+let tasks: TodoTask[] = [];
 
 function saveTasks(): void {
   fs.writeFileSync(TASKS_FILE_PATH, JSON.stringify(tasks), "utf-8");
 }
 
-function loadTasks(): void {
+function loadTasks() {
   try {
     const data = fs.readFileSync(TASKS_FILE_PATH, "utf-8");
     tasks = JSON.parse(data);
   } catch (err) {
     tasks = [];
   }
+  return tasks;
 }
 
 function addTask(description: string): void {
-  const newTask: Task = {
-    id: tasks.length + 1,
-    description,
-    done: false,
+  
+    const newTask: TodoTask = {
+    idNumber: tasks.length + 1,
+    taskName: description,
+    isCompletedTask: false,
   };
-  console.log('llllleeeeennnngggtttth'+tasks.length);
   tasks.push(newTask);
   saveTasks();
 }
 
 function markTaskAsDone(id: number): void {
-  const task = tasks.find((t) => t.id === id);
+  const task = tasks.find((t) => t.idNumber === id);
   if (task) {
-    task.done = true;
+    task.isCompletedTask = true;
     saveTasks();
 
   }
 }
 
 function deleteTask(id: number): void {
-  const taskIndex = tasks.findIndex((t) => t.id === id);
-  console.log('aaaa' +taskIndex);
+  const taskIndex = tasks.findIndex((t) => t.idNumber === id);
   
   if (taskIndex !== -1) {
     tasks.splice(taskIndex, 1);
@@ -55,7 +48,7 @@ function deleteTask(id: number): void {
   }
 }
 
-function listTasks(): Task[] {
+function listTasks(): TodoTask[] {
   loadTasks();
   return tasks;
 }

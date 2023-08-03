@@ -26,6 +26,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.loadTasks = exports.listTasks = exports.deleteTask = exports.markTaskAsDone = exports.addTask = void 0;
 const fs = __importStar(require("fs"));
 const TASKS_FILE_PATH = "tasks.json";
+// interface Task {
+//   id: number;
+//   description: string;
+//   done: boolean;
+// }
 let tasks = [];
 function saveTasks() {
     fs.writeFileSync(TASKS_FILE_PATH, JSON.stringify(tasks), "utf-8");
@@ -38,30 +43,29 @@ function loadTasks() {
     catch (err) {
         tasks = [];
     }
+    return tasks;
 }
 exports.loadTasks = loadTasks;
 function addTask(description) {
     const newTask = {
-        id: tasks.length + 1,
-        description,
-        done: false,
+        idNumber: tasks.length + 1,
+        taskName: description,
+        isCompletedTask: false,
     };
-    console.log('llllleeeeennnngggtttth' + tasks.length);
     tasks.push(newTask);
     saveTasks();
 }
 exports.addTask = addTask;
 function markTaskAsDone(id) {
-    const task = tasks.find((t) => t.id === id);
+    const task = tasks.find((t) => t.idNumber === id);
     if (task) {
-        task.done = true;
+        task.isCompletedTask = true;
         saveTasks();
     }
 }
 exports.markTaskAsDone = markTaskAsDone;
 function deleteTask(id) {
-    const taskIndex = tasks.findIndex((t) => t.id === id);
-    console.log('aaaa' + taskIndex);
+    const taskIndex = tasks.findIndex((t) => t.idNumber === id);
     if (taskIndex !== -1) {
         tasks.splice(taskIndex, 1);
         saveTasks();

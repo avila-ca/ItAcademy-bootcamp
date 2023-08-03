@@ -1,25 +1,35 @@
 // tests/tasks.test.ts
 import { addTask, markTaskAsDone, deleteTask, listTasks } from "../tasks";
+import * as fs from "fs";
+
 
 test("Agrega una nueva tarea", () => {
+  fs.unlinkSync("tasks.json");
   addTask("Tarea para  crear");
   const tasks = listTasks();
   expect(tasks).toHaveLength(1);
   expect(tasks[0]).toEqual(expect.objectContaining({
-    description: "Tarea para  crear",
-    done: false,
+    idNumber: 1,
+    taskName: "Tarea para  crear",
+    isCompletedTask: false,
+    
   }));
 });
 
 test("Marca una tarea como hecha", () => {
+  fs.unlinkSync("tasks.json");
   addTask("Tarea para marcar");
-  markTaskAsDone(1);
+  markTaskAsDone(2);
   const tasks = listTasks();
-  expect(tasks[0].done).toBe(true);
+  
+  expect(tasks[1].isCompletedTask).toBe(true);
 });
 
 test("Elimina una tarea", () => {
+  fs.unlinkSync("tasks.json");
   addTask("Tarea para eliminar");
-  deleteTask(1);
-  expect(listTasks()[1]).toEqual(listTasks()[1]);
+  const tasks = listTasks();
+  
+  deleteTask(3);
+  expect(listTasks()[2]).toEqual(listTasks()[2]);
 });

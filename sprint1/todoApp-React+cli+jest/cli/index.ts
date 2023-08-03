@@ -18,7 +18,7 @@ if (command === "add") {
   console.log("Task deleted successfully!");
 } else if (command === "list") {
   listTasks().forEach((task) => {
-    const status = task.done ? "[x]" : "[ ]";
-    console.log(`${status} ${task.id}. ${task.description}`);
+    const status = task.isCompletedTask ? "[x]" : "[ ]";
+    console.log(`${status} ${task.idNumber}. ${task.taskName}`);
   });
 }
