@@ -11,7 +11,6 @@ export interface TodoTask {
 const App: React.FC = () => {
   const [idNum, setIdNum] = useState<number>(1)
   const [task, setTask] = useState<string>('');
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const isCompleted:boolean = false;
   const [list,setList] = useState<TodoTask[]>([]);
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {

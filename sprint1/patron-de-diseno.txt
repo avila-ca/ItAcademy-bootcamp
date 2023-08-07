@@ -1,0 +1,11 @@
+
+El patrón de diseño funcional
+
+Es un patrón basado en el uso de funciones puras para implementar programas.
+Las funciones no dependen de otras funciones, se pueden ejecutar de manera indepandiente y siempre generarán
+el mismo resultado. Son muy predecibles y fáciles de leer. Con lo que 
+simplifican el mantenimiento del código y su depuración.
+Se da la inmutabilidad de datos, con lo que no pueden cambiar después de su creación.
+Las funciones serán las que se encarguen de crear nuevos datos a partir de los ya existentes.
+Así evitamos errores por la modificación accidental de datos.
+Se combinan funciones para dar lugar a funcionalidades más avanzadas, permitiendo un diseño modular y escalabla.

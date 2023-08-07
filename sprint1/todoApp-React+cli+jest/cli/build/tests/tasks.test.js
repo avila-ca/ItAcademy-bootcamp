@@ -26,29 +26,30 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // tests/tasks.test.ts
 const tasks_1 = require("../tasks");
 const fs = __importStar(require("fs"));
-//fs.unlinkSync("tasks.json");
-test("Agrega una nueva tarea", () => {
-    fs.unlinkSync("tasks.json");
-    (0, tasks_1.addTask)("Tarea para  crear");
-    const tasks = (0, tasks_1.listTasks)();
-    expect(tasks).toHaveLength(1);
-    expect(tasks[0]).toEqual(expect.objectContaining({
-        idNumber: 1,
-        taskName: "Tarea para  crear",
-        isCompletedTask: false,
-    }));
-});
-test("Marca una tarea como hecha", () => {
-    fs.unlinkSync("tasks.json");
-    (0, tasks_1.addTask)("Tarea para marcar");
-    (0, tasks_1.markTaskAsDone)(2);
-    const tasks = (0, tasks_1.listTasks)();
-    expect(tasks[1].isCompletedTask).toBe(true);
-});
-test("Elimina una tarea", () => {
-    fs.unlinkSync("tasks.json");
-    (0, tasks_1.addTask)("Tarea para eliminar");
-    const tasks = (0, tasks_1.listTasks)();
-    (0, tasks_1.deleteTask)(3);
-    expect((0, tasks_1.listTasks)()[2]).toEqual((0, tasks_1.listTasks)()[2]);
+describe('add, delete & mark task', () => {
+    afterEach(() => {
+        fs.unlinkSync("tasks.json");
+    });
+    test("Agrega una nueva tarea", () => {
+        (0, tasks_1.addTask)("Tarea para  crear");
+        const tasks = (0, tasks_1.listTasks)();
+        expect(tasks).toHaveLength(1);
+        expect(tasks[0]).toEqual(expect.objectContaining({
+            idNumber: 1,
+            taskName: "Tarea para  crear",
+            isCompletedTask: false,
+        }));
+    });
+    test("Marca una tarea como hecha", () => {
+        (0, tasks_1.addTask)("Tarea para marcar");
+        (0, tasks_1.markTaskAsDone)(2);
+        const tasks = (0, tasks_1.listTasks)();
+        expect(tasks[1].isCompletedTask).toBe(true);
+    });
+    test("Elimina una tarea", () => {
+        (0, tasks_1.addTask)("Tarea para eliminar");
+        const tasks = (0, tasks_1.listTasks)();
+        (0, tasks_1.deleteTask)(3);
+        expect((0, tasks_1.listTasks)()[2]).toEqual((0, tasks_1.listTasks)()[2]);
+    });
 });

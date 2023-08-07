@@ -26,11 +26,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.loadTasks = exports.listTasks = exports.deleteTask = exports.markTaskAsDone = exports.addTask = void 0;
 const fs = __importStar(require("fs"));
 const TASKS_FILE_PATH = "tasks.json";
-// interface Task {
-//   id: number;
-//   description: string;
-//   done: boolean;
-// }
 let tasks = [];
 function saveTasks() {
     fs.writeFileSync(TASKS_FILE_PATH, JSON.stringify(tasks), "utf-8");

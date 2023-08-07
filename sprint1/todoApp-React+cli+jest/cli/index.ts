@@ -1,7 +1,8 @@
-// src/index.ts
 import { addTask, markTaskAsDone, deleteTask, listTasks, loadTasks } from "./tasks";
 const args = require("yargs").argv;
+
 loadTasks();
+
 const command = args._[0];
 
 if (command === "add") {
