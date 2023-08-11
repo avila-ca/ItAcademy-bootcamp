@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-// src/index.ts
 const tasks_1 = require("./tasks");
 const args = require("yargs").argv;
 (0, tasks_1.loadTasks)();
