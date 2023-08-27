@@ -5,7 +5,7 @@ let value:string = '';
 let i:number = 0;
 
 function doSomething() {
-  console.log("I am doing something " + arr.join(''))
+  console.log(arr.join(''))
 }
 
 const debounced = debounce(doSomething, value, arr)

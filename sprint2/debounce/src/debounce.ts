@@ -11,3 +11,4 @@ export default function debounce(func:Function, value:string, arr:string[] ,dela
     }, delay)
   }
 }
+
