@@ -5,18 +5,17 @@ import './App.css'
 function App() {
   const arr:string[] = [];
   const [input, setInput] = useState('');
+  const [output, setOutput] = useState('');
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newInput = event.target.value;
     setInput(newInput);
     debounced(newInput, arr);
   }
-const str:string = '';
-  const doSomething = (str:string) => {
+
+  const doSomething = () => {
     
-     str = arr.join('');
-     console.log(str);
-     
-     return str;
+    const str:string = arr.join('');
+     setOutput(str);
   }
 
   const debounced = debounce(doSomething, input, arr);
@@ -24,7 +23,8 @@ const str:string = '';
   return (
     <>
      <input type='text' value={input} onChange={handleInputChange} placeholder='Write something' />
-     {doSomething}
+     <br/><br/>
+     <textarea placeholder='Text debounced' value={output} cols={40} rows={5}/>
     </>
   )
 }
