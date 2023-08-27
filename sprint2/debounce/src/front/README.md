@@ -6,25 +6,29 @@ Node-typescript App project with 2 interfaces: cli & react, and tested with jest
 ## Installation 
 
 ```
-
+cd sprint2/debounce
+npm i
+cd src/front
 npm i
 ```
 
 ## Usage React Interface
 ```
-cd react-ts
+cd sprint2/debounce/src/front
 npm run dev
 ```
 
 ## Usage Cli Interface
-
-cd cli 
+```
+cd sprint2/debounce/src
+npx tsc --jsx "react"
+```
 ```bash
-node build/index.js 
+node ../dist/cli.js "your debounce text"
 ```
 
 ## Testing
 ```
 cd cli
 npx jest
-```
+``` 
