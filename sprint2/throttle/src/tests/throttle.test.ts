@@ -1,4 +1,3 @@
-import { afterEach } from 'node:test';
 import throttle from '../throttle';
 
 
