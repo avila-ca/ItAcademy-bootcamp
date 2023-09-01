@@ -1,8 +1,15 @@
-export const memoize = ()=>{
-    let i = 0;
+import { timeEnd } from "console";
 
-    return ()=>{
-        console.log('hello world' + i);
-        i++;
+export const memoize = (factorial:Function) => {
+
+    let cache:number[] = [];
+    
+    return (n:number)=>{
+        if(cache[n]){
+            return cache[n];
+        }else{
+            cache[n] = factorial(n);
+            return cache[n];
+        }
     }
 }
