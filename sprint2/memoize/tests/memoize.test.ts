@@ -17,15 +17,42 @@ describe('memoize function', () => {
     
         expect(mockFunc).toHaveBeenCalledTimes(2);
     })
-    test('Calling the function with 2 and would return 4',() => {
+    test('Calling the function with the argument 2 and will return 4',() => {
 
-        const mockFn = jest.fn(); 
-    
-    
         const memoizedFunction = memoize(loopFn);
-    
-        //memoizedFunction(2);  
-    
+        
         expect(memoizedFunction(2)).toBe(4);
+    })
+    test('Calling the function with the same argument and the last call will be more quick than the first', () =>{
+       
+        let result = 0;
+        
+        const mockFn = jest.fn((n:number) => {
+            
+            for (let index = 0; index < n; index++) {
+                for (let indexB = 0; indexB < n; indexB++) {
+                    result++;
+                }
+                
+            }
+        })
+
+        const memoized = memoize(mockFn);
+
+        const start1 = performance.now();
+        const result1 = memoized(56);
+        const end1 = performance.now();
+        const time1 = end1 - start1;
+
+        const start2 = performance.now();
+        const result2 = memoized(56);
+        const end2= performance.now();
+        const time2 = end2 - start2;
+
+        expect(mockFn).toHaveBeenCalledTimes(2);
+        expect(mockFn).toHaveBeenCalledWith(56);
+
+        expect(time2).toBeLessThan(time1)
+
     })
 })

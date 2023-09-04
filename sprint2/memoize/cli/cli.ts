@@ -1,7 +1,7 @@
 import {memoize} from "./memoize";
 
 
-const loopFn = (n:number) => {
+export const loopFn = (n:number) => {
     let totalLoops = 0;
 
         for (let index = 0; index < n; index++) {
@@ -10,16 +10,19 @@ const loopFn = (n:number) => {
                 
             }
         }
+        
         return totalLoops;
 }
 
 
 const memoized = memoize(loopFn);
 
-console.time();
-console.log(memoized(12));
-console.timeEnd();
+const userInput:number = +process.argv[2];
 
-console.time();
-console.log(memoized(12));
-console.timeEnd();
+console.time('Execution Time');
+console.log(memoized(userInput));
+console.timeEnd('Execution Time');
+
+console.time('Execution Time');
+console.log(memoized(userInput));
+console.timeEnd('Execution Time');
