@@ -1,5 +1,6 @@
+import { ITask } from "./Task";
 import { Todo } from "./Todo";
-import { add, list } from "./choicesInquirer";
+import { add, list, remove } from "./choicesInquirer";
 
 // import inquirer from 'inquirer';
 const inquirer = require("inquirer");
@@ -26,15 +27,16 @@ export const select =async () => {
          newTodo.add(newTask)
        break;
      case 'Remove':
- 
+      const taskToRemove = await remove();
+      const removeTask = new Todo(null)      
+      removeTask.remove(taskToRemove.id)
        break;
      case 'Completed':
      
        
        break;
      case 'list':
-      const listTask = await list()
-      console.log(listTask)
+      list()      
       break;
      default:
        break;
