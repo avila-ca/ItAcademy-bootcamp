@@ -1,5 +1,5 @@
 import { Todo } from "./Todo";
-import { add } from "./choicesInquirer";
+import { add, list } from "./choicesInquirer";
 
 // import inquirer from 'inquirer';
 const inquirer = require("inquirer");
@@ -33,8 +33,9 @@ export const select =async () => {
        
        break;
      case 'list':
- 
-       break;
+      const listTask = await list()
+      console.log(listTask)
+      break;
      default:
        break;
      }

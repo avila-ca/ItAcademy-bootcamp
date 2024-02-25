@@ -2,6 +2,7 @@ import { ITask, Task } from "./Task"
 import { existFile } from "./existFile";
 import fs from 'node:fs'
 import { dbFile } from ".";
+import { select } from "./inquirer";
 
 export interface ITodo {
     update: () => Promise <Task[] | null>,
@@ -14,7 +15,7 @@ export interface ITodo {
 export class Todo implements ITodo {
      tasks: ITask[];
 
-    constructor(newTask: ITask){
+    constructor(newTask: ITask | null){
         this.tasks = [];
     }
 
@@ -22,27 +23,35 @@ export class Todo implements ITodo {
         if (existFile()) {
             try {
                 const dataSaved = await fs.promises.readFile(dbFile)
-                const tasks = JSON.parse(dataSaved.toString())
-                this.tasks.push(tasks)
+            
+                console.log(dataSaved.toString(), this.tasks);
+                const tasks = await JSON.parse(dataSaved.toString())
+                this.tasks = [...tasks]
+                
                 return tasks;
             } catch (error) {
                 console.error('Error reading file: ', error);
-                fs.writeFile(dbFile, '[]', (err) => {
-                    if (err) {
-                        console.error('Error creating new file dbFile.ts', err);
-                        return;
-                    }
-                })
-                return null;
+               
             }
+        } else {
+            fs.writeFile(dbFile, '[]', (err: unknown) => {
+                if (err) {
+                    console.error('Error creating new file dbFile.ts', err);
+                }
+            })
         }
+        return null
     }
 
     add = async (newtask: Task) => {
-        await this.update()
-        this.tasks.push(newtask)
-
-        console.log('en add(): '+this.tasks, this.tasks[this.tasks.length - 1]+ 'fin add()');
+        try {
+            await this.update()
+            this.tasks.push(newtask)
+            this.loadToFile()
+            select()
+        }catch(err){
+            console.error("Error adding new task: " +err);
+        }
         return true;
     }
 
@@ -52,7 +61,7 @@ export class Todo implements ITodo {
 
     }
     list = () => {
-
+        this.update();
         return this.tasks;
     }
     completed = (newtask:ITask) => {
@@ -60,8 +69,13 @@ export class Todo implements ITodo {
         return true;
 
     }
+
     private loadToFile = () => {
-        
+        fs.writeFile(dbFile, JSON.stringify(this.tasks), (err: unknown) => {
+            if (err) {
+                console.error('Error creating new file dbFile.ts', err);
+            }
+        })
     }
 
 }
